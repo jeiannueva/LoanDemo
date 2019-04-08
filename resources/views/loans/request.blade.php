@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Loan Dashboard</div>
+                <div class="card-header">Requesting a new loan</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,11 @@
                         </div>
                     @endif
 
-                    You can edit the loan dashboard here
+
+                    <div class="card-body">
+                        @include('loans/form')
+                    </div>
+
 
                 </div>
             </div>

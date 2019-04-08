@@ -12,8 +12,4 @@ class LoanRequest extends Model
     protected $fillable = [
         'lender_id', 'loaner_id', 'loan_amount', 'amount_paid', 'due_date', 'status', 
     ];
-
-    protected $casts = [
-        'due_date' => 'datetime',
-    ];
 }

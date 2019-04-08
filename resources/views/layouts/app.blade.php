@@ -40,7 +40,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('add_loan') }}">{{ __('Request Loan') }}</a>                  
-                                <a class="dropdown-item" href="{{ route('edit_loan') }}">{{ __('Edit Loan') }}</a>
+                                {{-- <a class="dropdown-item" href="{{ route('edit_loan') }}">{{ __('Edit Loan') }}</a> --}}
                                 <a class="dropdown-item" href="{{ route('view_loan') }}">{{ __('All Loan') }}</a>
                             </div>
                         </li>

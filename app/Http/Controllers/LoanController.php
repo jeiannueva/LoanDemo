@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\LoanRequestRequest;
 use App\LoanRequest;
 
 class LoanController extends Controller
@@ -22,18 +23,27 @@ class LoanController extends Controller
     }
 
     public function add(){
-        //Create a view first
+       return view('loans/request'); //Return new loan only. No changes required
     }
 
-    public function processadd(Request $request){
-        //Function to be created after view
+    public function processadd(LoanRequestRequest $request){
+        LoanRequest::create($request->validated());
+        return back()->with('status', 'Successful create operation.');
     }
 
-    public function edit(){
-        //Create a view first
+    public function edit($loanid){
+        $loan = LoanRequest::find($loanid);
+        
+        if($loan == null){
+            return back()->with('status', 'No data found');
+        }else{
+            return $loan;
+        }
+        
+        //return view('loans.request')->with('loan', $loan);
     }
 
-    public function processedit(Request $request){
+    public function processedit(LoanRequestRequest $request){
         //Function to be created after view
     }
 
@@ -48,5 +58,4 @@ class LoanController extends Controller
     public function harddelete(Request $request){
         LoanRequest::find($request->id)->forcedelete();
     }
-
 }
