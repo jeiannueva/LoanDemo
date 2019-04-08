@@ -33,7 +33,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('loan') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ __('Loans') }} <span class="caret"></span>
+                                    </a>
 
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('add_loan') }}">{{ __('Request Loan') }}</a>                  
+                                <a class="dropdown-item" href="{{ route('edit_loan') }}">{{ __('Edit Loan') }}</a>
+                                <a class="dropdown-item" href="{{ route('view_loan') }}">{{ __('All Loan') }}</a>
+                            </div>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

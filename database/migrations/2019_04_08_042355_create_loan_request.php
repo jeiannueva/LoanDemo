@@ -13,7 +13,7 @@ class CreateLoanRequest extends Migration
      */
     public function up()
     {
-        Schema::create('loan_request', function (Blueprint $table) {
+        Schema::create('loan_requests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('lender_id'); //Lender ID
             $table->integer('loaner_id'); //Loaner ID
