@@ -16,15 +16,11 @@
 
 
                     <div class="card-body">
-<<<<<<< HEAD
                         @if(empty($loan))
                             @include('loans/form')                           
                         @else
                             @include('loans/edit')
                         @endif
-=======
-                        @include('loans/form')
->>>>>>> matthew
                     </div>
 
 

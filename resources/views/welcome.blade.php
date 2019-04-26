@@ -5,10 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-<<<<<<< HEAD
-=======
         <link href="{!! asset('css/app.css') !!}" rel="stylesheet"></link>
->>>>>>> matthew
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -17,24 +14,17 @@
         <style>
             html, body {
                 background-color: #fff;
-<<<<<<< HEAD
-                color: #636b6f;
-=======
                 color: white;
->>>>>>> matthew
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
-<<<<<<< HEAD
-=======
                 overflow: hidden;
             }
 
             .bg1{
                 background-image: url({!! asset('images/bg3.jpg') !!});
                 background-size:cover;
->>>>>>> matthew
             }
 
             .full-height {
@@ -55,8 +45,6 @@
                 position: absolute;
                 right: 10px;
                 top: 18px;
-<<<<<<< HEAD
-=======
                 padding: 20px
             }
 
@@ -65,7 +53,6 @@
                 left: 10px;
                 top: 18px;
                 padding: 20px;
->>>>>>> matthew
             }
 
             .content {
@@ -77,11 +64,7 @@
             }
 
             .links > a {
-<<<<<<< HEAD
-                color: #636b6f;
-=======
                 color: white;
->>>>>>> matthew
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -90,26 +73,16 @@
                 text-transform: uppercase;
             }
 
-<<<<<<< HEAD
-=======
             .links>a:hover{
                 color:#7d7777;
             }
 
->>>>>>> matthew
             .m-b-md {
                 margin-bottom: 30px;
             }
         </style>
     </head>
     <body>
-<<<<<<< HEAD
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-=======
         <div class="bg1" style="width:100%;height:100%; position:absolute; z-index:1">
 
         </div>
@@ -122,7 +95,6 @@
                     <a href="{{ route('loan') }}">{{ __('Lend Money') }}</a>
                     @auth
                         <a href="{{ url('/home') }}">Profile</a>
->>>>>>> matthew
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -132,13 +104,6 @@
                     @endauth
                 </div>
             @endif
-<<<<<<< HEAD
-
-            <div class="content">
-                <div class="title m-b-md">
-                    SQA Application
-                </div>
-=======
             <div class="top-left links">
                 <img src="{!! asset('images/font2.png') !!}" width="40%">
             </div>
@@ -151,7 +116,6 @@
                 </div>
                 <br><br>
                 <a href="{{ url('/loans/add') }}"><button type="button" class="btn btn-primary" style="font-size:1.3em; padding-left:60px;padding-right:60px;">Apply for Loans </button></a>
->>>>>>> matthew
 
                 <div class="links">
                     {{-- <a href="https://laravel.com/docs">Docs</a>
@@ -161,11 +125,6 @@
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a> --}}
-<<<<<<< HEAD
-
-                    <a href="{{ route('loan') }}">{{ __('Loans') }}</a>
-=======
->>>>>>> matthew
                 </div>
             </div>
         </div>
