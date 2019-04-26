@@ -59,7 +59,7 @@
                                 <a href="{{ url('/loans/add') }}"><button type="button" style="border-radius:20px"class="btn btn-primary btn">Apply for Loan</button></a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('loan') }}">
+                                <a href="{{ route('lendMoney') }}">
                                 <button type="button" style="border-radius:20px" class="btn btn-secondary btn">Lend Money</button>
                                 </a>
                             </li>

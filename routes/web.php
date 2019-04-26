@@ -19,7 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 //Loans
-Route::get('/loans', 'LoanController@index')->name('loan');
+Route::get('/loans/toggleLending', 'LoanController@index')->name('lendMoney');
+Route::post('/loans/toggleLending', 'LoanController@togglelending')->name('process_lending');
+
 Route::get('/loans/add', 'LoanController@add')->name('add_loan'); //Display of Form 
 Route::post('loans/add', 'LoanController@processadd')->name('process_new_loan'); // Form acceptance to Database
 Route::get('/loans/edit/{loanid}', ['as' => 'loanid', 'uses' =>'LoanController@edit'])->name('edit_loan'); //Display of Edit Form

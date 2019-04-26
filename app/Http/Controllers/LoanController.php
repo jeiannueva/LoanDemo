@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LoanRequestRequest;
 use App\LoanRequest;
 use DB;
+use Auth;
 
 class LoanController extends Controller
 {
@@ -20,7 +21,26 @@ class LoanController extends Controller
     }
 
     public function index(){
-       return view('loans/home'); //Return the view only. No changes required
+        $user = DB::table('users')->where('id', Auth::id())->pluck('isLending');
+
+       return view('loans/home', ['isLending' => $user]);
+    }
+
+    public function togglelending(Request $request){
+       $skips = ["[","]","\""];
+       $isLending = str_replace($skips, ' ', DB::table('users')->where('id', Auth::id())->pluck('isLending'));
+
+       if ($isLending == 0) {
+            DB::table('users')
+                ->where('id', Auth::id())
+                ->update(['isLending' => 1]);
+           return back()->with('status', 'Successfully turned on Lending.');
+       }elseif ($isLending == 1) {
+           DB::table('users')
+                ->where('id', Auth::id())
+                ->update(['isLending' => 0]);
+           return back()->with('status', 'Successfully turned off Lending.');
+       }
     }
 
     public function add(){
