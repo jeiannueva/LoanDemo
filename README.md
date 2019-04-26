@@ -28,8 +28,8 @@ cp .env.example .env
 # Generate key
 php artisan key:generate
 
-# Run migrations (tables and Seeders)
-php artisan migrate --seed
+# Run migrations
+php artisan migrate
 
 # Create Server
 php artisan serve
