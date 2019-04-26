@@ -18,8 +18,8 @@ class CreateLoanRequest extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('lender_id')->unsigned();
             $table->bigInteger('loaner_id')->unsigned();
-            #$table->foreign('lender_id')->references('id')->on('users');; // Create lender ID
-            #$table->foreign('loaner_id')->references('id')->on('users');; // Create loaner ID
+            $table->foreign('lender_id')->references('id')->on('users');; // Create lender ID
+            $table->foreign('loaner_id')->references('id')->on('users');; // Create loaner ID
             $table->decimal('loan_amount'); // Original Loan Cost
             $table->decimal('amount_paid'); // Amount paid
             $table->dateTime('due_date'); // Deadline
