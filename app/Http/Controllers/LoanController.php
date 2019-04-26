@@ -44,11 +44,14 @@ class LoanController extends Controller
     }
 
     public function processedit(LoanRequestRequest $request){
-        //Function to be created after view
+        $loan = LoanRequest::find($request->id);
+
+        LoanRequest::edit($request);
+        return back()->with('status', 'Request has been edited sucessfully');
     }
 
     public function check(Request $request){
-        return LoanRequest::find(1); //View required
+        return LoanRequest::find(1);
     }
 
     public function delete(Request $request){
