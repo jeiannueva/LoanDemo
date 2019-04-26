@@ -23,8 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/loans', 'LoanController@index')->name('loan');
 Route::get('/loans/add', 'LoanController@add')->name('add_loan'); //Display of Form
 Route::post('loans/add', 'LoanController@processadd')->name('process_new_loan'); // Form acceptance to Database
-Route::get('/loans/edit/{loanid}', ['as' => 'loanid', 'uses' =>'LoanController@edit'])->name('edit_loan'); //Display of Edit Form
+Route::get('/loans/edit', 'LoanController@edit')->name('loan_edit'); //Display of Edit Form
 Route::post('/loans/edit', 'LoanController@processedit'); // Form acceptance to Database
 Route::get('/loan/check', 'LoanController@check')->name('view_loan'); //Show content of Database
-Route::post('/loan/delete', 'LoanController@delete')->name('delete_loan');
+Route::get('/loan/delete', 'LoanController@delete')->name('delete_loan');
 //Route::post('/loan/harddelete', 'LoanController@harddelete'); //Delete Loan in Database HARD

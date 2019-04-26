@@ -5,8 +5,17 @@
         <div class="form-group row">
             <label for="lender_id" class="col-md-4 col-form-label text-md-right">{{ __('Lender ID') }}</label>
             <div class="col-md-6">
-                <input id="lender_id" type="number" class="form-control{{ $errors->has('lender_id') ? ' is-invalid' : '' }}" name="lender_id" value="{{ old('lender_id') }}" min="0" required autofocus>
-
+                <select id="lender_id" class="form-control{{ $errors->has('lender_id') ? ' is-invalid' : '' }}" name="lender_id" value="{{ old('lender_id') }}" min="0" required autofocus>
+                  
+                @if (empty($users))                                    
+                    Whoops! Something went wrong                            
+                @else
+                    @foreach($users as $idUser => $user)
+                        <option value="{{$idUser}}">{{$user}}</option>
+                    @endforeach
+                @endif
+                    
+                </select>    
                 @if ($errors->has('lender_id'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('lender_id') }}</strong>
@@ -19,8 +28,15 @@
         <div class="form-group row">
                 <label for="loaner_id" class="col-md-4 col-form-label text-md-right">{{ __('Loaner ID') }}</label>
                 <div class="col-md-6">
-                    <input id="loaner_id" type="number" class="form-control{{ $errors->has('loaner_id') ? ' is-invalid' : '' }}" name="loaner_id" value="{{ old('loaner_id') }}" min="0" required autofocus>
-
+                    <select id="loaner_id" type="number" class="form-control{{ $errors->has('loaner_id') ? ' is-invalid' : '' }}" name="loaner_id" value="{{ old('loaner_id') }}" min="0" required autofocus>
+                        @if (empty($users))                                    
+                            Whoops! Something went wrong                            
+                        @else
+                            @foreach($users as $idUser => $user)
+                                <option value="{{$idUser}}">{{$user}}</option>
+                            @endforeach
+                        @endif
+                    </select>   
                     @if ($errors->has('loaner_id'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('loaner_id') }}</strong>
@@ -77,7 +93,18 @@
         <div class="form-group row">
                 <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
                 <div class="col-md-6">
-                    <input id="status" type="number" class="form-control{{ $errors->has('status') ? ' is-invalid' : '' }}" name="status" value="{{ old('status') }}" min="0" step="any" required autofocus>
+                    <select id="status" type="number" class="form-control{{ $errors->has('status') ? ' is-invalid' : '' }}" name="status" value="{{ old('status') }}" min="0" step="any" required autofocus>
+
+                    @if (empty($status))                                    
+                        Whoops! Something went wrong                            
+                    @else
+                        @foreach($status as $idStatus => $status)
+                            <option value="{{$status->id}}">{{$status->description}}</option>
+                        @endforeach
+                    @endif
+
+                    </select>
+
 
                     @if ($errors->has('status'))
                         <span class="invalid-feedback" role="alert">
