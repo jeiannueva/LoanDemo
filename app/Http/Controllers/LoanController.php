@@ -29,11 +29,12 @@ class LoanController extends Controller
        $users = User::pluck('name','id'); //Get all users to set as lender/loaner
        $status = DB::table('loan_status')->get(); // No model as this is just status
        return view('loans/request', compact('users','status')); //Return new loan only. No changes required
+       return view('loans/home'); //Return the view only. No changes required
     }
 
     public function processadd(LoanRequestRequest $request){
         LoanRequest::create($request->validated());
-        return back()->with('status', 'Successful create operation.');
+        return back()->with('status', 'Request Submitted to Lender.');
     }
 
     public function edit(Request $request){

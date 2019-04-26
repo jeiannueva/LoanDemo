@@ -18,7 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
 //Loans
 Route::get('/loans', 'LoanController@index')->name('loan');
 Route::get('/loans/add', 'LoanController@add')->name('add_loan'); //Display of Form

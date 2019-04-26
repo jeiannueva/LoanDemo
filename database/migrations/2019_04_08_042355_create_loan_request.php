@@ -25,7 +25,6 @@ class CreateLoanRequest extends Migration
             $table->dateTime('due_date'); // Deadline
             $table->bigInteger('status')->unsigned(); //Loan Status
             $table->foreign('status')->references('id')->on('loan_status');
-            $table->timestamps();
         });
     }
 
