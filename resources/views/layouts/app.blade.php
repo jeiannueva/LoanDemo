@@ -55,7 +55,7 @@
                             @endif
                         @else
                             <li class="nav-item" style="margin-right:10px">
-                                <button type="button" style="border-radius:20px"class="btn btn-primary btn">Apply for Loan</button>
+                                <a href="{{ url('/loans/add') }}"><button type="button" style="border-radius:20px"class="btn btn-primary btn">Apply for Loan</button></a>
                             </li>
                             <li class="nav-item">
                                 <button type="button" style="border-radius:20px" class="btn btn-secondary btn">Lend Money</button>

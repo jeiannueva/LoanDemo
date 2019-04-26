@@ -115,7 +115,7 @@
                     You deserve more options for your financial needs.<br> On Five6 we connect you to hundreds of local bombays within arm's reach.
                 </div>
                 <br><br>
-                <button type="button" class="btn btn-primary" style="font-size:1.3em; padding-left:60px;padding-right:60px;">Apply for Loans </button>
+                <a href="{{ url('/loans/add') }}"><button type="button" class="btn btn-primary" style="font-size:1.3em; padding-left:60px;padding-right:60px;">Apply for Loans </button></a>
 
                 <div class="links">
                     {{-- <a href="https://laravel.com/docs">Docs</a>

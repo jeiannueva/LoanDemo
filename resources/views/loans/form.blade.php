@@ -16,18 +16,18 @@
         </div>
 
         <!-- Loaner ID -->
-        <div class="form-group row">
+        <!-- <div class="form-group row">
                 <label for="loaner_id" class="col-md-4 col-form-label text-md-right">{{ __('Loaner ID') }}</label>
-                <div class="col-md-6">
-                    <input id="loaner_id" type="number" class="form-control{{ $errors->has('loaner_id') ? ' is-invalid' : '' }}" name="loaner_id" value="{{ old('loaner_id') }}" min="0" required autofocus>
-
+                <div class="col-md-6"> -->
+                    <input id="loaner_id" type="hidden" class="form-control{{ $errors->has('loaner_id') ? ' is-invalid' : '' }}" name="loaner_id" value="{{ Auth::user()->id }}" min="0" required autofocus>
+<!-- 
                     @if ($errors->has('loaner_id'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('loaner_id') }}</strong>
                         </span>
                     @endif
                 </div>
-        </div>
+        </div> -->
 
 
         <!-- loan_amount -->
@@ -44,48 +44,48 @@
                 </div>
         </div>
 
-        {{-- amount_paid --}}
+        <!-- {{-- amount_paid --}}
         <div class="form-group row">
                 <label for="amount_paid" class="col-md-4 col-form-label text-md-right">{{ __('Amount paid') }}</label>
-                <div class="col-md-6">
-                    <input id="amount_paid" type="number" class="form-control{{ $errors->has('amount_paid') ? ' is-invalid' : '' }}" name="amount_paid" value="{{ old('amount_paid') }}" min="0" step="any" required autofocus>
-
+                <div class="col-md-6"> -->
+                    <input id="amount_paid" type="hidden" class="form-control{{ $errors->has('amount_paid') ? ' is-invalid' : '' }}" name="amount_paid" value="0" min="0" step="any" required autofocus>
+<!-- 
                     @if ($errors->has('amount_paid'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('amount_paid') }}</strong>
                         </span>
                     @endif
                 </div>
-        </div>
+        </div> -->
 
 
-        {{-- due_date --}}
+       <!--  {{-- due_date --}}
         <div class="form-group row">
                 <label for="due_date" class="col-md-4 col-form-label text-md-right">{{ __('Due date') }}</label>
-                <div class="col-md-6">
-                    <input id="due_date" type="datetime-local" class="form-control{{ $errors->has('due_date') ? ' is-invalid' : '' }}" name="due_date" value="{{ old('due_date') }}" required autofocus>
-
+                <div class="col-md-6"> -->
+                    <input id="due_date" type="hidden" class="form-control{{ $errors->has('due_date') ? ' is-invalid' : '' }}" name="due_date" value="0001-01-01 01:01:00" required autofocus>
+<!-- 
                     @if ($errors->has('due_date'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('due_date') }}</strong>
                         </span>
                     @endif
                 </div>
-        </div>
+        </div> -->
 
-        {{-- status --}}
+        <!-- {{-- status --}}
         <div class="form-group row">
                 <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
-                <div class="col-md-6">
-                    <input id="status" type="number" class="form-control{{ $errors->has('status') ? ' is-invalid' : '' }}" name="status" value="{{ old('status') }}" min="0" step="any" required autofocus>
-
+                <div class="col-md-6"> -->
+                    <input id="status" type="hidden" class="form-control{{ $errors->has('status') ? ' is-invalid' : '' }}" name="status" value="0" min="0" step="any" required autofocus>
+<!-- 
                     @if ($errors->has('status'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('status') }}</strong>
                         </span>
                     @endif
                 </div>
-        </div>
+        </div> -->
 
 
         {{-- <div class="form-group row">
