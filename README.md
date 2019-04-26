@@ -15,3 +15,25 @@ To *developer install
 1. Download the zip file
 2. Install Laravel but do not create "laravel new"
 3. Install MySQL and Content
+
+
+## Config
+```
+# Install dependencies
+composer install
+
+# Create file .env
+cp .env.example .env
+
+# Generate key
+php artisan key:generate
+
+# Run migrations (tables and Seeders)
+php artisan migrate --seed
+
+# Create Server
+php artisan serve
+
+# Access project
+http://localhost:8080
+```
