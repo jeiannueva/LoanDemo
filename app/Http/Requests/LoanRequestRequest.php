@@ -26,12 +26,12 @@ class LoanRequestRequest extends FormRequest
     public function rules()
     {
         return [
-            'lender_id' => 'required',
-            'loaner_id' => 'required',
-            'loan_amount' => 'required',
-            'amount_paid' => 'required',
+            'lender_id' => 'required|exists:users,id',
+            'loaner_id' => 'required|exists:users,id',
+            'loan_amount' => 'required|min:0',
+            'amount_paid' => 'required|min:0',
             'due_date' => 'required',
-            'status' => 'required'
+            'status' => 'required|exists:loan_status,id'
         ];
     }
 }

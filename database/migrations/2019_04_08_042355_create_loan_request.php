@@ -14,14 +14,17 @@ class CreateLoanRequest extends Migration
     public function up()
     {
         Schema::create('loan_requests', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->integer('lender_id'); //Lender ID
-            $table->integer('loaner_id'); //Loaner ID
+            $table->bigInteger('lender_id')->unsigned();
+            $table->bigInteger('loaner_id')->unsigned();
+            $table->foreign('lender_id')->references('id')->on('users');; // Create lender ID
+            $table->foreign('loaner_id')->references('id')->on('users');; // Create loaner ID
             $table->decimal('loan_amount'); // Original Loan Cost
             $table->decimal('amount_paid'); // Amount paid
             $table->dateTime('due_date'); // Deadline
-            $table->integer('status'); //Loan Status
-            $table->timestamps();
+            $table->bigInteger('status')->unsigned(); //Loan Status
+            $table->foreign('status')->references('id')->on('loan_status');
         });
     }
 
