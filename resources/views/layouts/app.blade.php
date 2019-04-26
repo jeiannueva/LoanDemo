@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Five6') }}</title>
 
     <!-- Scripts -->
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -66,7 +66,7 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div id="dropMe" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('add_loan') }}">{{ __('Apply Loan') }}</a>
                                     {{-- <a class="dropdown-item" href="{{ route('edit_loan') }}">{{ __('Edit Loan') }}</a> --}}
                                     <a class="dropdown-item" href="{{ route('view_loan') }}">{{ __('All Loan') }}</a>
@@ -92,5 +92,21 @@
             @yield('content')
         </main>
     </div>
+
+    <script type="text/javascript">
+        var checker = 0;
+        $("#navbarDropdown").click(function(){
+            $("#dropMe").attr("style", "display:block")
+            console.log(checker)
+            checker =1
+        });
+
+        $(".py-4").click(function(){
+            if(checker == 1){
+                $("#dropMe").attr("style", "display:none")
+                checker=0
+            }
+        });
+    </script>
 </body>
 </html>
