@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoanRequestRequest;
 use App\LoanRequest;
+use DB;
 
 class LoanController extends Controller
 {
@@ -23,12 +24,15 @@ class LoanController extends Controller
     }
 
     public function add(){
-       return view('loans/request'); //Return new loan only. No changes required
+                $users = DB::table('users')->get();
+
+        return view('loans/request', ['users' => $users]);
+       //return view('loans/request'); //Return new loan only. No changes required
     }
 
     public function processadd(LoanRequestRequest $request){
         LoanRequest::create($request->validated());
-        return back()->with('status', 'Successful create operation.');
+        return back()->with('status', 'Request Submitted to Lender.');
     }
 
     public function edit($loanid){

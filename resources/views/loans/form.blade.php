@@ -101,3 +101,19 @@
             </div>
         </div>
     </form>
+
+    <!-- user datas -->
+    <table>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>isLending</th>
+        </tr>
+    @foreach($users as $key => $data)
+        <tr>
+            <td>{{$data->id}}</td>
+            <td>{{$data->name}}</td>
+            <td>{{$data->isLending}}</td>
+        </tr>
+    @endforeach
+    </table>
