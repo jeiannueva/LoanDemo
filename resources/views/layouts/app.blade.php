@@ -108,5 +108,14 @@
             }
         });
     </script>
+
+    <script type="text/javascript">
+        $(".push").click(function(e) {
+            e.preventDefault()
+            $("#lender_id").val($(this).parent().parent().find(".details").text().trim())
+            $("#loan_amount").val($('#amount').val().trim())
+            $('#requestLoan').submit()
+        });
+    </script>
 </body>
 </html>
