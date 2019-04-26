@@ -16,7 +16,11 @@
 
 
                     <div class="card-body">
-                        @include('loans/form')
+                        @if(empty($loan))
+                            @include('loans/form')                           
+                        @else
+                            @include('loans/edit')
+                        @endif
                     </div>
 
 

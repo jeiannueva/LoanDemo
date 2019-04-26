@@ -38,13 +38,16 @@ class LoanController extends Controller
 
     public function edit(Request $request){
         $loan = LoanRequest::find($request->loanid);
+        $users = User::pluck('name','id'); //Get all users to set as lender/loaner
+        $status = DB::table('loan_status')->get(); // No model as this is just status
         
         if($loan == null)
             return back()->with('status', "Loan could not be found.");
         else if($loan->loaner_id != Auth::id())
             return back()->with('status', "You don't have priveledges to see this");
         else
-            return view('loans/request');      
+            return view('loans/request',compact('loan','users','status'));      
+
     }
 
     public function processedit(LoanRequestRequest $request){
