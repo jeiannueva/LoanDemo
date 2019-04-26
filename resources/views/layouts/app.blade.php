@@ -59,7 +59,9 @@
                                 <a href="{{ url('/loans/add') }}"><button type="button" style="border-radius:20px"class="btn btn-primary btn">Apply for Loan</button></a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ route('loan') }}">
                                 <button type="button" style="border-radius:20px" class="btn btn-secondary btn">Lend Money</button>
+                                </a>
                             </li>
                             <li class="nav-item dropdown" style="margin-left:60px">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -67,9 +69,6 @@
                                 </a>
 
                                 <div id="dropMe" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('add_loan') }}">{{ __('Apply Loan') }}</a>
-                                    {{-- <a class="dropdown-item" href="{{ route('edit_loan') }}">{{ __('Edit Loan') }}</a> --}}
-                                    <a class="dropdown-item" href="{{ route('view_loan') }}">{{ __('All Loan') }}</a>
                                     <a class="dropdown-item" href="{{ route('home') }}">{{ __('Profile') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -93,6 +92,7 @@
         </main>
     </div>
 
+    <script type="text/javascript" src="{{ asset('js/js/jquery-3.3.1.min.js') }}"></script>
     <script type="text/javascript">
         var checker = 0;
         $("#navbarDropdown").click(function(){
@@ -106,6 +106,15 @@
                 $("#dropMe").attr("style", "display:none")
                 checker=0
             }
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(".push").click(function(e) {
+            e.preventDefault()
+            $("#lender_id").val($(this).parent().parent().find(".details").text().trim())
+            $("#loan_amount").val($('#amount').val().trim())
+            $('#requestLoan').submit()
         });
     </script>
 </body>
