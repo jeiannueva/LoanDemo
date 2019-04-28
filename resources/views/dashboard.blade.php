@@ -10,7 +10,7 @@
                           <div class="row">
                               <div class="col">
                                   <h5>Current Balance</h5>
-                                  <h2 class="card-title" style="text-align:center"><b>9,200</b> <sup style="color:gray"><small>PHP</small><sup></h2>
+                                  <h2 class="card-title" style="text-align:center"><b>{{$userBalance}}</b> <sup style="color:gray"><small>PHP</small><sup></h2>
                               </div>
                               <div class="col" style="text-align:center"><br>
                                   <button  style="border-radius:80px" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">+ Add Balance</button>
@@ -249,7 +249,7 @@
                           </div>
                           <div class="col">
                               <div class="form-group">
-                                <label for="exampleInputPassword1">CV CODE</label>
+                                <label for="exampleInputPassword1">CVV CODE</label>
                                 <input type="text" class="form-control" id="text1">
                               </div>
                           </div>
@@ -287,7 +287,7 @@
                           </div>
                           <div class="col">
                               <div class="form-group">
-                                <label for="exampleInputPassword1">CV CODE</label>
+                                <label for="exampleInputPassword1">CVV CODE</label>
                                 <input type="text" class="form-control" id="text1">
                               </div>
                           </div>

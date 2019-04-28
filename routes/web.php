@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@index')->name('home');
 //Loans
 Route::get('/loans/toggleLending', 'LoanController@index')->name('lendMoney');
 Route::post('/loans/toggleLending', 'LoanController@togglelending')->name('process_lending');

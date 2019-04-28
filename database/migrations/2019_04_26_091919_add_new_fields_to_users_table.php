@@ -15,6 +15,7 @@ class AddNewFieldsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('isLending')->default(1)->after('password');
+            $table->float('balance')->default(0.0)->after('isLending');
         });
     }
 
