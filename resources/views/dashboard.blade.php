@@ -16,6 +16,11 @@
                                   <button  style="border-radius:80px" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">+ Add Balance</button>
                               </div>
                           </div>
+                          @if (session('status'))
+                              <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                              </div>
+                              @endif
                       </div>
                     </div>
                 </div>
@@ -231,10 +236,11 @@
                 </button>
               </div>
               <div class="modal-body">
-                  <form class="" action="index.html" method="post">
+                  <form class="" action="{{ route('process_add_balance') }}" method="post">
+                          @csrf
                           <div class="form-group">
                             <label for="exampleInputPassword1">AMOUNT</label>
-                            <input type="text" class="form-control" id="text1">
+                            <input type="number" step="0.01" class="form-control" id="amount" name="amount">
                           </div>
                       <div class="form-group">
                         <label for="exampleInputPassword1">CARD NUMBER</label>
@@ -254,10 +260,10 @@
                               </div>
                           </div>
                       </div>
+                      <div class="modal-footer">
+                        <input type="submit" value="Add Balance" class="btn btn-primary">
+                      </div>
                   </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Add Balance</button>
               </div>
             </div>
           </div>

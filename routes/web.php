@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('home');
+Route::post('/dashboard', 'DashboardController@process_add_balance')->name('process_add_balance');
+
 //Loans
 Route::get('/loans/toggleLending', 'LoanController@index')->name('lendMoney');
 Route::post('/loans/toggleLending', 'LoanController@togglelending')->name('process_lending');
