@@ -142,7 +142,8 @@
             <div class="col">
                 <h4>Loan Requests</h4>
                 <div style="overflow:auto; height:300px">
-                    <!-- LOOP HERE -->
+                  @if($loanRequests != '[]')
+                    @foreach($loanRequests as $key => $data)
                     <div class="card" style="width:30rem">
                       <div class="card-body">
                           <div class="row">
@@ -156,7 +157,7 @@
                                   <span style="color:#efca04">3</span><span style="color:gray"> / 5</span>
                               </div>
                               <div class="col">
-                                  2000 <sup style="color:gray">PHP</sup>
+                                  {{ $data->loan_amount }} <div style="color:green; font-size: 0.9em">+{{ ($data->loan_amount*0.20) }}</div> <sup style="color:gray">PHP</sup>
                               </div>
                               <div class="col" style="padding-right:2px">
                                 <button  style="border-radius:80px" type="button" class="btn btn-primary btn-sm">Accept</button>
@@ -167,7 +168,12 @@
                           </div>
                       </div>
                     </div>
-                    <!-- UP TO HERE -->
+                    @endforeach
+                  @else
+                  <div class="card-body">
+                    <h4> :( You have no loan requests at the moment.</h4>
+                  </div>
+                  @endif
 
                 </div>
             </div>

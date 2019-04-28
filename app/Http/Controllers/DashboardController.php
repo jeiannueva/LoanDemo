@@ -27,7 +27,10 @@ class DashboardController extends Controller
     {
        $userBalance = DB::table('users')->where('id', Auth::id())->value('balance');
 
-       return view('dashboard', ['userBalance' => $userBalance]);
+       $loanRequests = DB::table('loan_requests')->where('lender_id', Auth::id())->get();
+
+
+       return view('dashboard', compact('userBalance', 'loanRequests'));
     }
 
     public function process_add_balance(Request $request){

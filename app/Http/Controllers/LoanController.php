@@ -44,7 +44,7 @@ class LoanController extends Controller
     }
 
     public function add(){
-                $users = DB::table('users')->get();
+                $users = DB::table('users')->where('isLending', 1)->where('id', '<>', Auth::id())->get();
 
         return view('loans/request', ['users' => $users]);
        //return view('loans/request'); //Return new loan only. No changes required

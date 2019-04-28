@@ -8,8 +8,8 @@
               <div class="card-body">
                   <form method="POST" action="">
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Loan Amount</label>
-                      <input type="number" class="form-control" id="amount" placeholder="0">
+                      <label for="exampleInputPassword1">Loan Amount (PHP)</label>
+                      <input type="number" class="form-control" id="amount" placeholder="0" required>
                     </div>
                     <!--<button type="submit" class="btn btn-primary">Search</button>-->
                   </form>
