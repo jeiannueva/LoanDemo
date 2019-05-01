@@ -1,8 +1,6 @@
 # LoanDemo
 Loan Application (Under Development)
 
-## Config
-'''
 # Install dependencies
 composer install
 
@@ -16,11 +14,10 @@ php artisan key:generate
 php artisan migrate
 
 #Run seeding
-php artisan db:seed --class=UsersTableSeeder
+php artisan db:seed --class=LoanStatusSeeder
 
 # Create Server
 php artisan serve
 
 # Access project
 http://localhost:8080
-'''
