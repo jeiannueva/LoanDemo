@@ -26,10 +26,7 @@ class DashboardController extends Controller
     public function index()
     {
        $userBalance = DB::table('users')->where('id', Auth::id())->value('balance');
-
        $loanRequests = DB::table('loan_requests')->where('lender_id', Auth::id())->get();
-
-
        return view('dashboard', compact('userBalance', 'loanRequests'));
     }
 
