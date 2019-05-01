@@ -91,10 +91,10 @@
         <div class="flex-center position-ref full-height" style="position:relative;z-index:3;">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    <a href="">Borrow</a>
-                    <a href="{{ route('loan') }}">{{ __('Lend Money') }}</a>
+                    <a href="{{ url('/loans/add') }}">Borrow</a>
+                    <a href="{{ route('lendMoney') }}">{{ __('Lend Money') }}</a>
                     @auth
-                        <a href="{{ url('/home') }}">Profile</a>
+                        <a href="{{ url('/dashboard') }}">Profile</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 

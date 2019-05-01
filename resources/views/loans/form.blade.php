@@ -1,6 +1,6 @@
-<form method="POST" action="{{ route('process_new_loan') }}">
+<form id="requestLoan" method="POST" action="{{ route('process_new_loan') }}">
         @csrf
-    
+
         <!-- Lender ID -->
         <div class="form-group row">
             <label for="lender_id" class="col-md-4 col-form-label text-md-right">{{ __('Lender ID') }}</label>
@@ -20,9 +20,7 @@
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('lender_id') }}</strong>
                     </span>
-                @endif
-            </div>
-        </div>
+                @endif-->
 
         <!-- Loaner ID -->
         <div class="form-group row">
@@ -47,18 +45,13 @@
 
 
         <!-- loan_amount -->
-        <div class="form-group row">
-                <label for="loan_amount" class="col-md-4 col-form-label text-md-right">{{ __('Loan Amount') }}</label>
-                <div class="col-md-6">
-                    <input id="loan_amount" type="number" class="form-control{{ $errors->has('loan_amount') ? ' is-invalid' : '' }}" name="loan_amount" value="{{ old('loan_amount') }}" min="0" step="any" required autofocus>
+                    <input id="loan_amount" type="hidden" class="form-control{{ $errors->has('loan_amount') ? ' is-invalid' : '' }}" name="loan_amount" value="{{ old('loan_amount') }}" min="0" step="any" required autofocus>
 
-                    @if ($errors->has('loan_amount'))
+                    <!--@if ($errors->has('loan_amount'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('loan_amount') }}</strong>
                         </span>
-                    @endif
-                </div>
-        </div>
+                    @endif-->
 
         {{-- amount_paid --}}
         <div class="form-group row">
@@ -93,7 +86,7 @@
         <div class="form-group row">
                 <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
                 <div class="col-md-6">
-                    <select id="status" type="number" class="form-control{{ $errors->has('status') ? ' is-invalid' : '' }}" name="status" value="{{ old('status') }}" min="0" step="any" required autofocus>
+                    <select id="status" type="hidden" class="form-control{{ $errors->has('status') ? ' is-invalid' : '' }}" name="status" value="{{ old('status') }}" min="0" step="any" required autofocus>
 
                     @if (empty($status))                                    
                         Whoops! Something went wrong                            
@@ -118,15 +111,6 @@
         {{-- <div class="form-group row">
             This is for announcements area
         </div> --}}
-
-        <div class="form-group row mb-0">
-            <div class="col-md-8 offset-md-4">
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Submit') }}
-                </button>
-
-            </div>
-        </div>
     </form>
 
     <!-- user datas -->
