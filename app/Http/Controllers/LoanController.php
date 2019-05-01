@@ -22,16 +22,18 @@ class LoanController extends Controller
     }
 
     public function index(){
-       return view('loans/home'); //Dashboard controller is required
-    }
-
-    public function add(){
-        $users = User::pluck('name','id')->where('id', Auth::id())->pluck('isLending'); //Get all users to set as lender/loaner
-        $status = DB::table('loan_status')->get(); // No model as this is just status
-        return view('loans/request', compact('users','status')); //Return new loan only. No changes required
-
+       $user = DB::table('users')->where('id', Auth::id())->pluck('isLending');
        return view('loans/home', ['isLending' => $user]);
+
     }
+
+    // public function add(){
+    //     $users = User::pluck('name','id')->where('id', Auth::id())->pluck('isLending'); //Get all users to set as lender/loaner
+    //     $status = DB::table('loan_status')->get(); // No model as this is just status
+    //     return view('loans/request', compact('users','status')); //Return new loan only. No changes required
+
+    //    return view('loans/home', ['isLending' => $user]);
+    // }
 
     public function togglelending(Request $request){
        $skips = ["[","]","\""];
@@ -50,12 +52,12 @@ class LoanController extends Controller
        }
     }
 
-    // public function add(){
-    //     $users = DB::table('users')->where('isLending', 1)->where('id', '<>', Auth::id())->get();
+    public function add(){
+        $users = DB::table('users')->where('isLending', 1)->where('id', '<>', Auth::id())->get();
 
-    //     return view('loans/request', ['users' => $users]);
-    //    //return view('loans/request'); //Return new loan only. No changes required
-    // }
+        return view('loans/request', ['users' => $users]);
+       //return view('loans/request'); //Return new loan only. No changes required
+    }
 
     public function processadd(LoanRequestRequest $request){
         LoanRequest::create($request->validated());
