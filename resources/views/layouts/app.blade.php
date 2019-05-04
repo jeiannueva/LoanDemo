@@ -43,10 +43,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-<<<<<<< HEAD
-=======
 
->>>>>>> matthew
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
