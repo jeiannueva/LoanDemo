@@ -37,9 +37,6 @@
                           <div class="col name" ideastyle="padding-left:0px">
                               {{$data->name}}
                           </div>
-                          <div class="col">
-                              <span style="color:#efca04">3</span><span style="color:gray"> / 5</span>
-                          </div>
                           <div class="col" style="padding-right:2px">
                             <button style="border-radius:80px" type="button" class="btn btn-primary btn-sm push">Request Loan</button>
                           </div>

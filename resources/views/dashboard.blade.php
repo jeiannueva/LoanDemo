@@ -30,7 +30,9 @@
                 </div>
             </div>
             <div class="col">
-                <div class="row">
+                @if($loanReminders != '[]')
+                  <div class="row">
+                  @foreach($loanReminders as $key => $data)
                     <div class="col">
                         <div class="card" style="width: 14rem;">
                           <div class="card-body">
@@ -45,8 +47,8 @@
                             <br>
                             <div class="row">
                                 <div class="col">
-                                    <h4 class="card-title">2000 <sup style="color:gray"><small>PHP</small><sup></h4>
-                                    <h6 class="card-subtitle mb-2 text-muted">Matthew Alviz</h6>
+                                    <h4 class="card-title">{{ $data->loan_amount }}<sup style="color:gray"><small>PHP</small><sup></h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ $data->name }}</h6>
                                 </div>
                                 <div class="col-5">
                                     <br>
@@ -56,93 +58,23 @@
                           </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card" style="width: 14rem;">
-                          <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    30 Days Until Due Date
-                                </div>
-                                <div class="col-4">
-                                    <i style="font-size:2.7em" class="far fa-calendar"></i>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col">
-                                    <h4 class="card-title">2000 <sup style="color:gray"><small>PHP</small><sup></h4>
-                                    <h6 class="card-subtitle mb-2 text-muted">Matthew Alviz</h6>
-                                </div>
-                                <div class="col-5">
-                                    <br>
-                                    <button  style="border-radius:80px" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal2">Pay Loan</button>
-                                </div>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                    <div class="row">
-                        <div class="col">
-                            <div class="card" style="width: 14rem;">
-                              <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        30 Days Until Due Date
-                                    </div>
-                                    <div class="col-4">
-                                        <i style="font-size:2.7em" class="far fa-calendar"></i>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col">
-                                        <h4 class="card-title">2000 <sup style="color:gray"><small>PHP</small><sup></h4>
-                                        <h6 class="card-subtitle mb-2 text-muted">Matthew Alviz</h6>
-                                    </div>
-                                    <div class="col-5">
-                                        <br>
-                                        <button  style="border-radius:80px" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal2">Pay Loan</button>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card" style="width: 14rem;">
-                              <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        30 Days Until Due Date
-                                    </div>
-                                    <div class="col-4">
-                                        <i style="font-size:2.7em" class="far fa-calendar"></i>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col">
-                                        <h4 class="card-title">2000 <sup style="color:gray"><small>PHP</small><sup></h4>
-                                        <h6 class="card-subtitle mb-2 text-muted">Matthew Alviz</h6>
-                                    </div>
-                                    <div class="col-5">
-                                        <br>
-                                        <button  style="border-radius:80px" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal2">Pay Loan</button>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                    </div>
+                    @if($key % 2 != 0 && $key != 0)
+                        </div><br>
+                        <div class="row">
+                    @endif
+                @endforeach
+                @endif
             </div>
         </div>
         <br><br>
-        <div class="row justify-content-center">
-            <div class="col">
-                <h4>Loan Requests</h4>
-                <div style="overflow:auto; height:300px">
                   @if($loanRequests != '[]')
+                  <form id="updateLoanReq" action="{{ route('updateLoanRequests') }}" method="post">
+                      <input id="changeMe1" type="hidden" name="" value="">
+                  </form>
+                  <div class="row justify-content-center">
+                      <div class="col">
+                          <h4>Loan Requests</h4>
+                          <div style="overflow:auto; height:300px">
                     @foreach($loanRequests as $key => $data)
                     <div class="card" style="width:30rem">
                       <div class="card-body">
@@ -151,83 +83,24 @@
                                 <i style="font-size:1.5em" class="fas fa-user-circle"></i>
                               </div>
                               <div class="col" style="padding-left:0px">
-                                  Matthew Alviz
-                              </div>
-                              <div class="col">
-                                  <span style="color:#efca04">3</span><span style="color:gray"> / 5</span>
+                                  {{ $data->name }}
                               </div>
                               <div class="col">
                                   {{ $data->loan_amount }} <div style="color:green; font-size: 0.9em">+{{ ($data->loan_amount*0.20) }}</div> <sup style="color:gray">PHP</sup>
                               </div>
                               <div class="col" style="padding-right:2px">
-                                <button  style="border-radius:80px" type="button" class="btn btn-primary btn-sm">Accept</button>
+                                <button  style="border-radius:80px" type="button" class="btn btn-primary btn-sm decision" value="1">Accept</button>
                               </div>
                               <div class="col" style="padding-left:0px">
-                                <button  style="border-radius:80px" type="button" class="btn btn-secondary btn-sm">Decline</button>
+                                <button  style="border-radius:80px" type="button" class="btn btn-secondary btn-sm decision" value="0">Decline</button>
                               </div>
                           </div>
                       </div>
                     </div>
                     @endforeach
-                  @else
-                  <div class="card-body">
-                    <h4> :( You have no loan requests at the moment.</h4>
-                  </div>
                   @endif
-
                 </div>
             </div>
-                <div class="col">
-                    <h4>History</h4>
-                    <div style="overflow:auto; height:300px">
-                        <!-- LOOP HERE -->
-                        <div class="card" style="width:30rem">
-                          <div class="card-body">
-                              <div class="row">
-                                  <div class="col" style="padding-right:0px">
-                                    <i style="font-size:1.5em" class="fas fa-user-circle"></i>
-                                  </div>
-                                  <div class="col" style="padding-left:0px">
-                                      Matthew Alviz
-                                  </div>
-                                  <div class="col">
-                                      <span style="color:#efca04">3</span><span style="color:gray"> / 5</span>
-                                  </div>
-                                  <div class="col">
-                                      2000 <sup style="color:gray">PHP</sup>
-                                  </div>
-                                  <div class="col" style="padding-right:2px">
-                                    <span class="badge badge-primary" style="border-radius:80px; padding:7px">Borrowed</span>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
-                        <!-- UP TO HERE -->
-
-
-                        <div class="card" style="width:30rem">
-                          <div class="card-body">
-                              <div class="row">
-                                  <div class="col" style="padding-right:0px">
-                                    <i style="font-size:1.5em" class="fas fa-user-circle"></i>
-                                  </div>
-                                  <div class="col" style="padding-left:0px">
-                                      Matthew Alviz
-                                  </div>
-                                  <div class="col">
-                                      <span style="color:#efca04">3</span><span style="color:gray"> / 5</span>
-                                  </div>
-                                  <div class="col">
-                                      2000 <sup style="color:gray">PHP</sup>
-                                  </div>
-                                  <div class="col" style="padding-right:2px">
-                                    <span class="badge badge-primary" style="border-radius:80px; padding:7px">Lent</span>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
         </div>
 
         <!-- Modal -->
@@ -319,7 +192,13 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <script type="text/javascript" src="{{ asset('js/js/mdb.min.js') }}"></script>
-
+<script type="text/javascript">
+    $(".decision").click(function() {
+        var decision = $(this).attr('value');
+        $('#changeMe1').val(decision);
+        $('#updateLoanReq').submit();
+    });
+</script>
 <script type="text/javascript">
 var ctx = document.getElementById('myChart').getContext("2d")
     var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
