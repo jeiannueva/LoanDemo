@@ -71,6 +71,7 @@
                   <form id="updateLoanReq" action="{{ route('updateLoanRequests') }}" method="post">
                       @csrf
                       <input id="changeMe1" name="changeMe1" type="hidden" value="">
+                      <input id="changeMe2" name="changeMe2" type="hidden" value="">
                   </form>
                   <div class="row justify-content-center">
                       <div class="col">
@@ -90,10 +91,10 @@
                                   {{ $data->loan_amount }} <div style="color:green; font-size: 0.9em">+{{ ($data->loan_amount*0.20) }}</div> <sup style="color:gray">PHP</sup>
                               </div>
                               <div class="col" style="padding-right:2px">
-                                <button  style="border-radius:80px" type="button" class="btn btn-primary btn-sm decision" value="1">Accept</button>
+                                <button  style="border-radius:80px" type="button" class="btn btn-primary btn-sm decision" value="1" loan="{{ $data->id }}">Accept</button>
                               </div>
                               <div class="col" style="padding-left:0px">
-                                <button  style="border-radius:80px" type="button" class="btn btn-secondary btn-sm decision" value="0">Decline</button>
+                                <button  style="border-radius:80px" type="button" class="btn btn-secondary btn-sm decision" loan="{{ $data->id }}" value="0">Decline</button>
                               </div>
                           </div>
                       </div>
@@ -196,7 +197,9 @@
 <script type="text/javascript">
     $(".decision").click(function() {
         var decision = $(this).attr('value');
+        var LenderNo = $(this).attr('loan');
         $('#changeMe1').val(decision);
+        $('#changeMe2').val(LenderNo);
         $('#updateLoanReq').submit();
     });
 </script>

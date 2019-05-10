@@ -35,7 +35,7 @@ class DashboardController extends Controller
 
        $getUserName = DB::table('users')->where('id', Auth::id())->value('name');
 
-       //error_log($loanRequests);
+       error_log($loanRequests);
 
        return view('dashboard', compact('userBalance','loanRequests', 'loanReminders'));
     }
@@ -52,7 +52,8 @@ class DashboardController extends Controller
 
     public function updateLoanRequests(Request $request){
         $decision = $request->input('changeMe1');
-        error_log($decision); //print to console
+        $LoanRequestID = $request->input('changeMe2');
+        error_log($LoanRequestID); //print to console
 
         //if 0(Decline), delete row in DB
         //if 1(Accept), set Status to 1
