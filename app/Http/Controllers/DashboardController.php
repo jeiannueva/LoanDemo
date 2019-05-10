@@ -34,7 +34,7 @@ class DashboardController extends Controller
 
         $loanReminders = DB::table('users')
             ->join('loan_requests', 'loan_requests.lender_id', '=', 'users.id')
-            ->where('status', 1)->get();
+            ->where('status', 1)->where('loaner_id', Auth::id())->get();
 
        $getUserName = DB::table('users')->where('id', Auth::id())->value('name');
 
@@ -62,11 +62,34 @@ class DashboardController extends Controller
         if($loanRequestStatus == -1){
 
         }else{
+            $dateNow = Date("Y-m-d H:i:s");
+            $due = Date("Y-m-d H:i:s", strtotime($dateNow."+1 Month"));
             DB::table('loan_requests')->where('id', $loanRequestID)->update(['status' => 1]);
+            DB::table('loan_requests')->where('id', $loanRequestID)->update(['due_date' => $due]);
             DB::table('users')->where('id', Auth::id())->update(['balance' => ($userBalance - $loanAmount)]);
         return back()->with('balanceStatus', ($loanAmount).'PHP was deducted to your balance.');
         }
         //if 0(Decline), delete row in DB
         //if 1(Accept), set Status to 1
+    }
+
+    public function payLoan(Request $request){
+        $loanID = $request->input('payMe2');
+        $Amount = (double)$request->input('payMe');
+        $balance = (double)DB::table('users')->where('id', Auth::id())->value('balance');
+        $Diff = $balance - $Amount;
+        DB::table('users')
+                  ->where('id', Auth::id())
+                  ->update(['balance' => ($Diff)]);
+        $query = DB::table('loan_requests')->where('id', $loanID)->value('lender_id');
+        $balance2 = (double)DB::table('users')->where('id', $query)->value('balance');
+        $Diff2 = $balance2 + $Amount;
+        DB::table('users')
+                  ->where('id', Auth::id())
+                  ->update(['balance' => ($Diff2)]);
+        DB::table('loan_requests')->where('id', $loanID)->update(['amount_paid' => ($Amount)]);
+
+        DB::table('loan_requests')->where('id', $loanID)->update(['status' => 2]);
+        return back()->with('balanceStatus', ($Amount).'PHP was deducted to your balance.');
     }
 }

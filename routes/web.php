@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('home');
 Route::post('/dashboard', 'DashboardController@process_add_balance')->name('process_add_balance');
 Route::post('/dashboard/updateLoanReq', 'DashboardController@updateLoanRequests')->name('updateLoanRequests');
+Route::post('/dashboard/payLoan', 'DashboardController@payLoan')->name('payLoan');
 
 //Loans
 Route::get('/loans/toggleLending', 'LoanController@index')->name('lendMoney');

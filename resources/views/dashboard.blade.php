@@ -36,6 +36,11 @@
             </div>
             <div class="col">
                 @if($loanReminders != '[]')
+                <form id="payLoan" action="{{ route('payLoan') }}" method="post">
+                    @csrf
+                    <input id="payMe" name="payMe" type="hidden" value="">
+                    <input id="payMe2" name="payMe2" type="hidden" value="">
+                </form>
                   <div class="row">
                   @foreach($loanReminders as $key => $data)
                     <div class="col">
@@ -43,7 +48,15 @@
                           <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    30 Days Until Due Date
+                                    <?php
+                                        $days = $data->due_date;
+                                        $then = date('Y-m-d', strtotime($days));
+                                        $then = strtotime($then);
+                                        $now = time();
+                                        $difference = $then - $now;
+                                        $days = floor($difference / (60*60*24) );
+                                    ?>
+                                    {{ $days }} Days Until Due Date
                                 </div>
                                 <div class="col-4">
                                     <i style="font-size:2.7em" class="far fa-calendar"></i>
@@ -57,7 +70,7 @@
                                 </div>
                                 <div class="col-5">
                                     <br>
-                                    <button  style="border-radius:80px" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal2">Pay Loan</button>
+                                    <button style="border-radius:80px" type="button" class="btn btn-primary btn-sm pay" amount="{{$data->loan_amount}}" loanID="{{$data->id}}">Pay Loan</button>
                                 </div>
                             </div>
                           </div>
@@ -206,6 +219,11 @@
         $('#changeMe1').val(decision);
         $('#changeMe2').val(LenderNo);
         $('#updateLoanReq').submit();
+    });
+    $(".pay").click(function() {
+        $('#payMe').val($(this).attr('amount'));
+        $('#payMe2').val($(this).attr('loanID'));
+        $('#payLoan').submit();
     });
 </script>
 <script type="text/javascript">
