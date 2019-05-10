@@ -27,10 +27,17 @@ class DashboardController extends Controller
     {
        $userBalance = DB::table('users')->where('id', Auth::id())->value('balance');
 
-       $loanRequests = DB::table('loan_requests')->where('lender_id', Auth::id())->get();
+       $loanRequests = DB::table('users')
+            ->join('loan_requests', 'loan_requests.loaner_id', '=', 'users.id')->where('status', 0)->where('lender_id', Auth::id())->get();
 
+        $loanReminders = DB::table('users')
+            ->join('loan_requests', 'loan_requests.lender_id', '=', 'users.id')->where('status', 1)->get();
 
-       return view('dashboard', compact('userBalance', 'loanRequests'));
+       $getUserName = DB::table('users')->where('id', Auth::id())->value('name');
+
+       //error_log($loanRequests);
+
+       return view('dashboard', compact('userBalance','loanRequests', 'loanReminders'));
     }
 
     public function process_add_balance(Request $request){
@@ -41,5 +48,10 @@ class DashboardController extends Controller
                 ->where('id', Auth::id())
                 ->update(['balance' => ($userBalance + $inputAmount)]);
         return back()->with('status', $inputAmount.'PHP added to your balance.');
+    }
+
+    public function updateLoanRequests(Request $request){
+        //$decision = $request->input('changeMe1');
+        error_log("HELLO");
     }
 }
