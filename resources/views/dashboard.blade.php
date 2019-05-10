@@ -69,7 +69,7 @@
         <br><br>
                   @if($loanRequests != '[]')
                   <form id="updateLoanReq" action="{{ route('updateLoanRequests') }}" method="post">
-                      <input id="changeMe1" type="hidden" name="" value="">
+                      <input id="changeMe1" type="hidden" id="loanRequestStatus" name="loanRequestStatus" value="">
                   </form>
                   <div class="row justify-content-center">
                       <div class="col">
