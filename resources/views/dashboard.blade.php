@@ -69,7 +69,8 @@
         <br><br>
                   @if($loanRequests != '[]')
                   <form id="updateLoanReq" action="{{ route('updateLoanRequests') }}" method="post">
-                      <input id="changeMe1" type="hidden" name="" value="">
+                      @csrf
+                      <input id="changeMe1" name="changeMe1" type="hidden" value="">
                   </form>
                   <div class="row justify-content-center">
                       <div class="col">

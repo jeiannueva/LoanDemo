@@ -51,7 +51,11 @@ class DashboardController extends Controller
     }
 
     public function updateLoanRequests(Request $request){
-        //$decision = $request->input('changeMe1');
-        error_log("HELLO");
+        $decision = $request->input('changeMe1');
+        error_log($decision); //print to console
+
+        //if 0(Decline), delete row in DB
+        //if 1(Accept), set Status to 1
+
     }
 }
