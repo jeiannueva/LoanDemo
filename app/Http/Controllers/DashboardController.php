@@ -54,12 +54,19 @@ class DashboardController extends Controller
     }
 
     public function updateLoanRequests(Request $request){
-        $id = (double)$request->input('id');
-        $loanRequestStatus = (double)$request->input('loanRequestStatus');
+        $loanRequestID = $request->input('changeMe2');
+        $loanRequestStatus = $request->input('changeMe1');
+        $loanAmount = (double)DB::table('loan_requests')->where('id', $loanRequestID)->value('loan_amount');
+        $userBalance = (double)DB::table('users')->where('id', Auth::id())->value('balance');
 
-        DB::table('loan_requests')
-                ->where('id', $id)
-                ->update(['balance' => ($userBalance + $inputAmount)]);
-        return back()->with('status', $inputAmount.'PHP added to your balance.');
+        if($loanRequestStatus == -1){
+
+        }else{
+            DB::table('loan_requests')->where('id', $loanRequestID)->update(['status' => 1]);
+            DB::table('users')->where('id', Auth::id())->update(['balance' => ($userBalance - $loanAmount)]);
+        return back()->with('balanceStatus', ($loanAmount).'PHP was deducted to your balance.');
+        }
+        //if 0(Decline), delete row in DB
+        //if 1(Accept), set Status to 1
     }
 }

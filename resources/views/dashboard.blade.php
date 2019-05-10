@@ -21,6 +21,11 @@
                               {{ session('status') }}
                             </div>
                           @endif
+                          @if (session('balanceStatus'))
+                            <div class="alert alert-danger" role="alert">
+                              {{ session('balanceStatus') }}
+                            </div>
+                          @endif
                       </div>
                     </div>
                 </div>
@@ -47,7 +52,7 @@
                             <br>
                             <div class="row">
                                 <div class="col">
-                                    <h4 class="card-title">{{ $data->loan_amount }}<sup style="color:gray"><small>PHP</small><sup></h4>
+                                    <h4 class="card-title">{{ $data->loan_amount * 1.20 }}<sup style="color:gray"><small>PHP</small><sup></h4>
                                     <h6 class="card-subtitle mb-2 text-muted">{{ $data->name }}</h6>
                                 </div>
                                 <div class="col-5">
@@ -69,7 +74,9 @@
         <br><br>
                   @if($loanRequests != '[]')
                   <form id="updateLoanReq" action="{{ route('updateLoanRequests') }}" method="post">
-                      <input id="changeMe1" type="hidden" id="loanRequestStatus" name="loanRequestStatus" value="">
+                      @csrf
+                      <input id="changeMe1" name="changeMe1" type="hidden" value="">
+                      <input id="changeMe2" name="changeMe2" type="hidden" value="">
                   </form>
                   <div class="row justify-content-center">
                       <div class="col">
@@ -89,10 +96,10 @@
                                   {{ $data->loan_amount }} <div style="color:green; font-size: 0.9em">+{{ ($data->loan_amount*0.20) }}</div> <sup style="color:gray">PHP</sup>
                               </div>
                               <div class="col" style="padding-right:2px">
-                                <button  style="border-radius:80px" type="button" class="btn btn-primary btn-sm decision" value="1">Accept</button>
+                                <button  style="border-radius:80px" type="button" class="btn btn-primary btn-sm decision" value="1" loan="{{ $data->id }}">Accept</button>
                               </div>
                               <div class="col" style="padding-left:0px">
-                                <button  style="border-radius:80px" type="button" class="btn btn-secondary btn-sm decision" value="0">Decline</button>
+                                <button  style="border-radius:80px" type="button" class="btn btn-secondary btn-sm decision" loan="{{ $data->id }}" value="-1">Decline</button>
                               </div>
                           </div>
                       </div>
@@ -195,7 +202,9 @@
 <script type="text/javascript">
     $(".decision").click(function() {
         var decision = $(this).attr('value');
+        var LenderNo = $(this).attr('loan');
         $('#changeMe1').val(decision);
+        $('#changeMe2').val(LenderNo);
         $('#updateLoanReq').submit();
     });
 </script>
