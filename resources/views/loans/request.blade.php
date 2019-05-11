@@ -5,7 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-3" style="margin-left:13vw">
             <div class="card">
-<<<<<<< HEAD
                 <div class="card-header">Requesting a new loan</div>
 
                 <div class="card-body">
@@ -22,13 +21,6 @@
                         @else
                             @include('loans/edit')
                         @endif
-=======
-              <div class="card-body">
-                  <form method="POST" action="">
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Loan Amount (PHP)</label>
-                      <input type="number" class="form-control" id="amount" placeholder="0" required>
->>>>>>> michael
                     </div>
                     <!--<button type="submit" class="btn btn-primary">Search</button>-->
                   </form>
