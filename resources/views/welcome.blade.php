@@ -94,12 +94,12 @@
                     <a href="{{ url('/loans/add') }}">Borrow</a>
                     <a href="{{ route('lendMoney') }}">{{ __('Lend Money') }}</a>
                     @auth
-                        <a href="{{ url('/dashboard') }}">Profile</a>
+                        <a id='profile' href="{{ url('/dashboard') }}">Profile</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a id='login' href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a id='register' href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
                 </div>
