@@ -56,12 +56,15 @@
                             @endif
                         @else
                             <li class="nav-item" style="margin-right:10px">
-                                <a href="{{ url('/loans/add') }}"><button type="button" style="border-radius:20px"class="btn btn-primary btn">Apply for Loan</button></a>
+                                <a href="{{ route('add_loan') }}"><button type="button" style="border-radius:20px"class="btn btn-primary btn">Apply for Loan</button></a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('lendMoney') }}">
                                 <button type="button" style="border-radius:20px" class="btn btn-secondary btn">Lend Money</button>
                                 </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('view_loan') }}"><button  type="button" style="border-radius:20px" class="btn btn-secondary btn">Ongoing Loans</button> </a>
                             </li>
                             <li class="nav-item dropdown" style="margin-left:60px">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

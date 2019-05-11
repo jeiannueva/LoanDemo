@@ -58,6 +58,7 @@ class DashboardController extends Controller
         $loanRequestStatus = $request->input('changeMe1');
         $loanAmount = (double)DB::table('loan_requests')->where('id', $loanRequestID)->value('loan_amount');
         $userBalance = (double)DB::table('users')->where('id', Auth::id())->value('balance');
+        $loanerId = (double)DB::table('loan_requests')->where('id', $loanRequestID)->value('loaner_id');
 
         if($loanRequestStatus == -1){
 
@@ -66,7 +67,8 @@ class DashboardController extends Controller
             $due = Date("Y-m-d H:i:s", strtotime($dateNow."+1 Month"));
             DB::table('loan_requests')->where('id', $loanRequestID)->update(['status' => 1]);
             DB::table('loan_requests')->where('id', $loanRequestID)->update(['due_date' => $due]);
-            DB::table('users')->where('id', Auth::id())->update(['balance' => ($userBalance - $loanAmount)]);
+            DB::table('users')->where('id', Auth::id())->update(['balance' => ($userBalance - $loanAmount)]); // lender
+            DB::table('users')->where('id', $loanerId)->update(['balance' => ($userBalance + $loanAmount)]); // loaner
         return back()->with('balanceStatus', ($loanAmount).'PHP was deducted to your balance.');
         }
         //if 0(Decline), delete row in DB
@@ -81,12 +83,14 @@ class DashboardController extends Controller
         DB::table('users')
                   ->where('id', Auth::id())
                   ->update(['balance' => ($Diff)]);
-        $query = DB::table('loan_requests')->where('id', $loanID)->value('lender_id');
-        $balance2 = (double)DB::table('users')->where('id', $query)->value('balance');
+
+        $lender_id = DB::table('loan_requests')->where('id', $loanID)->value('lender_id');
+        $balance2 = (double)DB::table('users')->where('id', $lender_id)->value('balance');
         $Diff2 = $balance2 + $Amount;
-        DB::table('users')
-                  ->where('id', Auth::id())
-                  ->update(['balance' => ($Diff2)]);
+        error_log($Diff2);
+
+        DB::table('users')->where('id', Auth::id()) ->update(['balance' => ($Diff)]); // lender
+        DB::table('users')->where('id', $lender_id)->update(['balance' => ($Diff2)]); // loaner
         DB::table('loan_requests')->where('id', $loanID)->update(['amount_paid' => ($Amount)]);
 
         DB::table('loan_requests')->where('id', $loanID)->update(['status' => 2]);

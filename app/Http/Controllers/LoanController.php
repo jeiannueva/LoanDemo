@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoanRequestRequest;
 use App\LoanRequest;
-use DB;
-use Auth;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LoanController extends Controller
 {
@@ -55,31 +56,38 @@ class LoanController extends Controller
         return back()->with('status', 'Request Submitted to Lender.');
     }
 
-    public function edit($loanid){
-        $loan = LoanRequest::find($loanid);
+    public function edit(Request $request){
+        $loan = LoanRequest::find($request->loanid);
+        $users = User::pluck('name','id'); //Get all users to set as lender/loaner
+        $status = DB::table('loan_status')->get(); // No model as this is just status
+        
+        if($loan == null)
+            return back()->with('status', "Loan could not be found.");
+        else if($loan->loaner_id != Auth::id())
+            return back()->with('status', "You don't have priveledges to see this");
+        else
+            return view('loans/request',compact('loan','users','status'));      
 
-        if($loan == null){
-            return back()->with('status', 'No data found');
-        }else{
-            return $loan;
-        }
-
-        //return view('loans.request')->with('loan', $loan);
     }
 
     public function processedit(LoanRequestRequest $request){
-        //Function to be created after view
+        $loan = LoanRequest::find($request->id);
+        LoanRequest::edit($request);
+        return back()->with('status', 'Request has been edited sucessfully');
     }
 
     public function check(Request $request){
-        return LoanRequest::find(1); //View required
+        $loans = LoanRequest::All();
+        return view('loans/list',compact('loans'));
     }
 
     public function delete(Request $request){
-        LoanRequest::find($request->id)->delete();
+        LoanRequest::find($request->loanid)->delete();
+        return back()->with('status', 'Data has been deleted sucessfully');
     }
 
     public function harddelete(Request $request){
-        LoanRequest::find($request->id)->forcedelete();
+        LoanRequest::find($request->loanid)->forcedelete();
+        return back()->with('status', 'Data has been purged from database table');
     }
 }
