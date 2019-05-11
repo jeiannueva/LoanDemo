@@ -14,7 +14,7 @@ class Status extends Migration
     public function up()
     {
         Schema::create('loan_status', function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned();
+            $table->bigIncrements('id');
             $table->string('description');
             $table->timestamps();
         });
