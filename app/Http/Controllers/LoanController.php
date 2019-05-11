@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoanRequestRequest;
 use App\LoanRequest;
-use DB;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LoanController extends Controller
 {
@@ -20,11 +22,30 @@ class LoanController extends Controller
     }
 
     public function index(){
-       return view('loans/home'); //Return the view only. No changes required
+        $user = DB::table('users')->where('id', Auth::id())->pluck('isLending');
+
+       return view('loans/home', ['isLending' => $user]);
+    }
+
+    public function togglelending(Request $request){
+       $skips = ["[","]","\""];
+       $isLending = str_replace($skips, ' ', DB::table('users')->where('id', Auth::id())->pluck('isLending'));
+
+       if ($isLending == 0) {
+            DB::table('users')
+                ->where('id', Auth::id())
+                ->update(['isLending' => 1]);
+           return back()->with('status', 'Successfully turned on Lending.');
+       }elseif ($isLending == 1) {
+           DB::table('users')
+                ->where('id', Auth::id())
+                ->update(['isLending' => 0]);
+           return back()->with('status', 'Successfully turned off Lending.');
+       }
     }
 
     public function add(){
-                $users = DB::table('users')->get();
+            $users = DB::table('users')->where('isLending', 1)->where('id', '<>', Auth::id())->get();
 
         return view('loans/request', ['users' => $users]);
        //return view('loans/request'); //Return new loan only. No changes required
@@ -35,31 +56,38 @@ class LoanController extends Controller
         return back()->with('status', 'Request Submitted to Lender.');
     }
 
-    public function edit($loanid){
-        $loan = LoanRequest::find($loanid);
+    public function edit(Request $request){
+        $loan = LoanRequest::find($request->loanid);
+        $users = User::pluck('name','id'); //Get all users to set as lender/loaner
+        $status = DB::table('loan_status')->get(); // No model as this is just status
         
-        if($loan == null){
-            return back()->with('status', 'No data found');
-        }else{
-            return $loan;
-        }
-        
-        //return view('loans.request')->with('loan', $loan);
+        if($loan == null)
+            return back()->with('status', "Loan could not be found.");
+        else if($loan->loaner_id != Auth::id())
+            return back()->with('status', "You don't have priveledges to see this");
+        else
+            return view('loans/request',compact('loan','users','status'));      
+
     }
 
     public function processedit(LoanRequestRequest $request){
-        //Function to be created after view
+        $loan = LoanRequest::find($request->id);
+        LoanRequest::edit($request);
+        return back()->with('status', 'Request has been edited sucessfully');
     }
 
     public function check(Request $request){
-        return LoanRequest::find(1); //View required
+        $loans = LoanRequest::All();
+        return view('loans/list',compact('loans'));
     }
 
     public function delete(Request $request){
-        LoanRequest::find($request->id)->delete();
+        LoanRequest::find($request->loanid)->delete();
+        return back()->with('status', 'Data has been deleted sucessfully');
     }
 
     public function harddelete(Request $request){
-        LoanRequest::find($request->id)->forcedelete();
+        LoanRequest::find($request->loanid)->forcedelete();
+        return back()->with('status', 'Data has been purged from database table');
     }
 }
