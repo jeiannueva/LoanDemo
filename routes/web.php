@@ -19,12 +19,14 @@ Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('home');
 Route::post('/dashboard', 'DashboardController@process_add_balance')->name('process_add_balance');
+Route::post('/dashboard/updateLoanReq', 'DashboardController@updateLoanRequests')->name('updateLoanRequests');
+Route::post('/dashboard/payLoan', 'DashboardController@payLoan')->name('payLoan');
 
 //Loans
 Route::get('/loans/toggleLending', 'LoanController@index')->name('lendMoney');
 Route::post('/loans/toggleLending', 'LoanController@togglelending')->name('process_lending');
 
-Route::get('/loans/add', 'LoanController@add')->name('add_loan'); //Display of Form 
+Route::get('/loans/add', 'LoanController@add')->name('add_loan'); //Display of Form
 Route::post('loans/add', 'LoanController@processadd')->name('process_new_loan'); // Form acceptance to Database
 Route::get('/loans/edit', 'LoanController@edit')->name('loan_edit'); //Display of Edit Form
 Route::post('/loans/edit', 'LoanController@processedit'); // Form acceptance to Database
