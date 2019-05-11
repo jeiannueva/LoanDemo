@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="col-5">
                                     <br>
-                                    <button style="border-radius:80px" type="button" class="btn btn-primary btn-sm pay" amount="{{$data->loan_amount}}" loanID="{{$data->id}}">Pay Loan</button>
+                                    <button style="border-radius:80px" type="button" class="btn btn-primary btn-sm pay" amount="{{$data->loan_amount * 1.20}}" loanID="{{$data->id}}">Pay Loan</button>
                                 </div>
                             </div>
                           </div>
