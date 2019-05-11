@@ -22,13 +22,33 @@ class LoanController extends Controller
     }
 
     public function index(){
-       return view('loans/home'); //Dashboard controller is required
+        $user = DB::table('users')->where('id', Auth::id())->pluck('isLending');
+
+       return view('loans/home', ['isLending' => $user]);
+    }
+
+    public function togglelending(Request $request){
+       $skips = ["[","]","\""];
+       $isLending = str_replace($skips, ' ', DB::table('users')->where('id', Auth::id())->pluck('isLending'));
+
+       if ($isLending == 0) {
+            DB::table('users')
+                ->where('id', Auth::id())
+                ->update(['isLending' => 1]);
+           return back()->with('status', 'Successfully turned on Lending.');
+       }elseif ($isLending == 1) {
+           DB::table('users')
+                ->where('id', Auth::id())
+                ->update(['isLending' => 0]);
+           return back()->with('status', 'Successfully turned off Lending.');
+       }
     }
 
     public function add(){
-       $users = User::pluck('name','id'); //Get all users to set as lender/loaner
-       $status = DB::table('loan_status')->get(); // No model as this is just status
-       return view('loans/request', compact('users','status')); //Return new loan only. No changes required
+                $users = DB::table('users')->where('isLending', 1)->where('id', '<>', Auth::id())->get();
+
+        return view('loans/request', ['users' => $users]);
+       //return view('loans/request'); //Return new loan only. No changes required
     }
 
     public function processadd(LoanRequestRequest $request){
