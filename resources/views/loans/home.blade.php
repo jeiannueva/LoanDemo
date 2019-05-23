@@ -17,9 +17,9 @@
                 <form id="toggleLending" method="POST" action="{{ route('process_lending') }}">
                     @csrf
                 @if($isLending=='[0]')
-                    <input type="submit" value="Turn on lending" class="btn btn-primary" style="font-size:1.3em; padding-left:60px;padding-right:60px;">
+                    <input type="submit" name="lendingStatus" value="Turn on lending" class="btn btn-primary" style="font-size:1.3em; padding-left:60px;padding-right:60px;">
                 @else
-                    <input type="submit" value="Turn off lending" class="btn btn-primary" style="font-size:1.3em; padding-left:60px;padding-right:60px;">
+                    <input type="submit" name="lendingStatus" value="Turn off lending" class="btn btn-primary" style="font-size:1.3em; padding-left:60px;padding-right:60px;">
                 @endif
 
                 <br><br>

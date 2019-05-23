@@ -60,7 +60,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('lendMoney') }}">
-                                <button type="button" style="border-radius:20px" class="btn btn-secondary btn">Lend Money</button>
+                                <button type="button" style="border-radius:20px" class="btn btn-secondary btn" name="lendMoneyButton">Lend Money</button>
                                 </a>
                             </li>
                             <li class="nav-item dropdown" style="margin-left:60px">

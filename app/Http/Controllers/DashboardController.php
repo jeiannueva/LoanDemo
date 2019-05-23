@@ -44,13 +44,17 @@ class DashboardController extends Controller
     }
 
     public function process_add_balance(Request $request){
-        $userBalance = (double)DB::table('users')->where('id', Auth::id())->value('balance');
-        $inputAmount = (double)$request->input('amount');
+        if(is_numeric($request->input('amount')) && ((double)($request->input('amount')) >= 0)){
+            $userBalance = (double)DB::table('users')->where('id', Auth::id())->value('balance');
+            $inputAmount = (double)$request->input('amount');
 
-      DB::table('users')
-                ->where('id', Auth::id())
-                ->update(['balance' => ($userBalance + $inputAmount)]);
-        return back()->with('status', $inputAmount.'PHP added to your balance.');
+            DB::table('users')
+                    ->where('id', Auth::id())
+                    ->update(['balance' => ($userBalance + $inputAmount)]);
+            return back()->with('status', $inputAmount.'PHP added to your balance.');
+        }else{
+            return back()->with('errorStatus', 'Inputted value is invalid. Please try again!');
+        }
     }
 
     public function updateLoanRequests(Request $request){

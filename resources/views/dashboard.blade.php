@@ -13,12 +13,17 @@
                                   <h2 class="card-title" style="text-align:center"><b>{{$userBalance}}</b> <sup style="color:gray"><small>PHP</small><sup></h2>
                               </div>
                               <div class="col" style="text-align:center"><br>
-                                  <button  style="border-radius:80px" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">+ Add Balance</button>
+                                  <button  style="border-radius:80px" name="addBalanceButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">+ Add Balance</button>
                               </div>
                           </div>
                           @if (session('status'))
                             <div class="alert alert-success" role="alert">
                               {{ session('status') }}
+                            </div>
+                          @endif
+                          @if (session('errorStatus'))
+                            <div class="alert alert-danger" role="alert">
+                              {{ session('errorStatus') }}
                             </div>
                           @endif
                           @if (session('balanceStatus'))
@@ -139,28 +144,28 @@
                           @csrf
                           <div class="form-group">
                             <label for="exampleInputPassword1">AMOUNT</label>
-                            <input type="number" step="0.01" class="form-control" id="amount" name="amount">
+                            <input type="text" step="0.01" class="form-control" id="amount" name="amount" required>
                           </div>
                       <div class="form-group">
                         <label for="exampleInputPassword1">CARD NUMBER</label>
-                        <input type="text" class="form-control" id="text1">
+                        <input type="text" class="form-control" id="card_number" name="card_number">
                       </div>
                       <div class="row">
                           <div class="col">
                               <div class="form-group">
                                 <label for="exampleInputPassword1">EXPIRATION DATE</label>
-                                <input type="text" class="form-control" id="text1">
+                                <input type="text" class="form-control" id="exp_date" name="exp_date">
                               </div>
                           </div>
                           <div class="col">
                               <div class="form-group">
                                 <label for="exampleInputPassword1">CVV CODE</label>
-                                <input type="text" class="form-control" id="text1">
+                                <input type="text" class="form-control" id="cvv" name="cvv">
                               </div>
                           </div>
                       </div>
                       <div class="modal-footer">
-                        <input type="submit" value="Add Balance" class="btn btn-primary">
+                        <input type="submit" name="addBalanceSubmitButton" value="Add Balance" class="btn btn-primary">
                       </div>
                   </form>
               </div>
