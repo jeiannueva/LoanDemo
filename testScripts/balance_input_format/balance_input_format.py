@@ -8,7 +8,7 @@ driver.get("http://127.0.0.1:8000/login")
 # login
 username = driver.find_element_by_name("email")
 username.clear()
-username.send_keys("qq@qq")
+username.send_keys("michael.cadavillo@gmail.com")
 password = driver.find_element_by_name("password")
 password.clear()
 password.send_keys("qwerqwer")
