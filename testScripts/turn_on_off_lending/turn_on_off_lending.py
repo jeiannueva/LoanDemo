@@ -1,6 +1,12 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+#####################################################
+#               
+#              Script by Michael Cadavillo
+#
+#####################################################
+
 driver = webdriver.Firefox()
 driver.get("http://127.0.0.1:8000/login")
 
