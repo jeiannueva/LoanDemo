@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+import time
 
 driver = webdriver.Firefox()
 driver.get("http://127.0.0.1:8000/loans/add")
@@ -12,7 +13,7 @@ password = driver.find_element_by_id("password")
 password.clear()
 password.send_keys("Wehttamachi123")
 password.send_keys(Keys.RETURN)
-driver.implicitly_wait(50)
+time.sleep(10)
 # input shouldn't be zero or negative
 driver.find_element_by_id("amount").clear()
 #Input zero value
