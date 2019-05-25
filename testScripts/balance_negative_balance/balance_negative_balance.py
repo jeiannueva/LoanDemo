@@ -26,7 +26,7 @@ driver.save_screenshot("clickAddBalanceButton.png")
 # input values in the form (User submitted an incorrect format)
 amount = driver.find_element_by_name("amount")
 #amount.send_keys("abc123")
-amount.send_keys("abc123")
+amount.send_keys("-1000")
 
 card_number = driver.find_element_by_name("card_number")
 card_number.send_keys("5210 5210 5210 5210")
