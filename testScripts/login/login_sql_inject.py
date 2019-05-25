@@ -1,3 +1,5 @@
+# CREATED BY: FRANCIS GARCIA
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
@@ -9,7 +11,7 @@ login_btn.click()
 
 email = driver.find_element_by_id("email")
 pw = driver.find_element_by_id("password")
-sql_injection = 'dummy@email.com\'" OR true\'';
+sql_injection = 'dummy@email.com\'" OR true\''
 #remember = driver.find_element_by_id("remember")
 
 email.clear()
